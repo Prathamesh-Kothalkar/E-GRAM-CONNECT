@@ -1,7 +1,10 @@
 export default function ServiceSection() {
     return (
       <>
-        <div className="flex justify-around">
+        <div className="font-semibold text-3xl p-5 text-black">
+          Web-App Service
+        </div>
+        <div className="flex flex-wrap justify-around">
           <ServiceCard title="Service 1" desc="Description of service 1" component={<SomeComponent />} />
           <ServiceCard title="Service 2" desc="Description of service 2" component={<SomeComponent />} />
           <ServiceCard title="Service 3" desc="Description of service 3" component={<SomeComponent />} />

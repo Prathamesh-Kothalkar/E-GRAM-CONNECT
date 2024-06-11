@@ -89,11 +89,10 @@ export default function XMenu() {
                     Notice's
                 </MenuItem>
                 <Divider/>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{navigate("/members");setAnchorEl(null)}}>
                  <ListItemIcon>
                  <People fontSize="small"/> 
                  </ListItemIcon>
-                    
                     Members
                 </MenuItem>
                 <Divider/>

@@ -1,0 +1,14 @@
+ul {
+    text-align: center;
+}
+
+li{
+        text-align: center;
+        /* margin: 9px; */
+        cursor: pointer;
+        transition: all ease-in 6ms;
+}
+
+li:hover{
+    transform: scale(1.1);
+}
