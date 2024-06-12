@@ -1,11 +1,12 @@
 import { CommuteOutlined, Home, Info, LoginOutlined, LoginRounded, Logout, NotificationsNoneRounded, People, Settings, Work, WorkOffRounded } from "@mui/icons-material";
 import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem } from "@mui/material";
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useEffect } from "react";
 import Login from "../Forms/Login";
 import { useNavigate } from "react-router-dom";
 
 export default function XMenu() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [isLogin,setIsLogin]=useState(false);
     const open = Boolean(anchorEl);
     const navigate=useNavigate();
     const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -15,6 +16,12 @@ export default function XMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    useEffect(()=>{
+        if(localStorage.getItem("token")){
+            setIsLogin(true);
+        }
+    },[])
 
     return (
         <>
@@ -103,12 +110,22 @@ export default function XMenu() {
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem onClick={()=>{navigate("/login"); setAnchorEl(null)}}>
+                {
+                    isLogin?
+                    <MenuItem onClick={()=>{localStorage.clear();setIsLogin(false);navigate("/login"); setAnchorEl(null)}}>
+                    <ListItemIcon>
+                        <LoginRounded fontSize="small" />
+                    </ListItemIcon>
+                    Logout
+                </MenuItem>
+                    :
+                    <MenuItem onClick={()=>{navigate("/login"); setAnchorEl(null)}}>
                     <ListItemIcon>
                         <LoginRounded fontSize="small" />
                     </ListItemIcon>
                     Login
                 </MenuItem>
+                }
             </Menu>
         </>
     );

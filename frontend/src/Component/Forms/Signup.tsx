@@ -5,6 +5,10 @@ import InputBox from "../FormComponent/InputBox";
 import PassworInput from "../FormComponent/PasswordInput";
 import BottomWarn from "../FormComponent/BottomWarn";
 import XMenu from "../Navigation/Menu";
+import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 export default function Signup(){
     const [username,setUserName]=useState();
@@ -13,15 +17,46 @@ export default function Signup(){
     const [email,setEmail]=useState();
     const [phone,setPhone]=useState();
     const [password,setPassword]=useState();
+    const [loading,setLoading]=useState(false)
+    const navigate=useNavigate();
 
-    const handleSubmit = () =>{
+    const handleSubmit = async () =>{
+        setLoading(true);
         if(!isValid(username,password,phone,name,lastName,email)){
-            alert("All Fields are Required")
+            toast.warn("All fields are required");
+            setLoading(false)
             return 
         }
+        try{
+                const response = await axios.post("http://localhost:3000/api/v1/user/signup",{
+                username,
+                name,
+                lastName,
+                email,
+                phone:Number(phone),
+                password
+            })
 
-        alert("okay");
+            if(response.data.message=="Username already Taken"){
+                toast.warn(response.data.message);
+                setLoading(false)
+                return 
+            }
 
+            const token = response.data.token
+            localStorage.setItem("token",token);
+            toast.success("Account Created");
+            navigate("/")
+            
+        }
+        catch(err){
+            console.log(err)
+            toast.error("Enter valid data Password must have 6 digit ")
+            setLoading(false)
+        }
+        finally{
+            setLoading(false);
+        }
     }
 
     return <>
@@ -35,11 +70,14 @@ export default function Signup(){
                         <InputBox text={"Email"} onChange={(e:any)=>{setEmail(e.target.value)}} />
                         <InputBox text={"Phone"} onChange={(e:any)=>{setPhone(e.target.value)}} />
                         <PassworInput onChange={(e:any)=>{setPassword(e.target.value)}}/>
-                        <XButton text={"Sign up"} onClick={handleSubmit}/>
+                        {
+                            loading?<CircularProgress size={30}/>: <XButton text={"Sign up"} onClick={handleSubmit}/>
+                        }
                         <BottomWarn msg="Already have Account ? " btn={"Login Here"} to={"/login"}/>
                     </div>
             </div>
-        </div>  
+        </div> 
+        <ToastContainer/>
     </>
 }
 

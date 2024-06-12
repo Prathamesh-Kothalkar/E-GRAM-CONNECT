@@ -6,9 +6,11 @@ import { JWT_SECRET } from "../config";
 import siginBody from "../validation/signin";
 import userAuth from "../Auth/userMiddleware";
 import griveanceBody from "../validation/griveance";
+import cors from "cors"
 
 const userRouter=express.Router();
 userRouter.use(express.json());
+// userRouter.use(cors())
 
 userRouter.get("/",userAuth,(req,res)=>{
     res.send("Welcome from User Server "+req.userId);
@@ -21,6 +23,7 @@ userRouter.post("/signup",async(req,res)=>{
             message:"Invalid Data",
             error:result.error
         })
+        return
     }
     
     const {username,name,lastName,email,phone,password}=req.body;

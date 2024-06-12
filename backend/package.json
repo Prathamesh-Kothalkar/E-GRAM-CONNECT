@@ -9,10 +9,13 @@
   "author": "Prathamesh-Kothalkar",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.6",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0",
+    "type": "file:../../../cors",
     "zod": "^3.23.8"
   },
   "devDependencies": {
