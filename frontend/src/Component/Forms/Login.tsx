@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import XButton from "../FormComponent/Button";
 import Heading from "../FormComponent/Heading";
 import InputBox from "../FormComponent/InputBox";
@@ -9,12 +9,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { IsLoginContext } from "../../Context/IsLoginContext";
+
 
 export default function Login() {
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const {setIsLogin}:any=useContext(IsLoginContext);
     const handleSubmit = async () => {
         setLoading(true)
         if (!isValid(username, password)) {
@@ -32,6 +35,7 @@ export default function Login() {
             const token: string = response.data.token;
             localStorage.setItem("token", token);
             toast.success(response.data.message);
+            setIsLogin(true)
             navigate("/")
         }
         catch (err: any) {
@@ -57,7 +61,7 @@ export default function Login() {
                     <InputBox text={"Username"} onChange={(e: any) => { setUserName(e.target.value) }} />
                     <PassworInput onChange={(e: any) => { setPassword(e.target.value) }} />
                         {
-                            loading?<CircularProgress />: <XButton text={"Login"} onClick={handleSubmit} />
+                            loading?<CircularProgress className="mt-3" />: <XButton text={"Login"} onClick={handleSubmit} />
                         }
                   
                     <BottomWarn msg="Don't Have Account? " btn={"Create Here"} to={"/signup"} />

@@ -1,12 +1,14 @@
-import { CommuteOutlined, Home, Info, LoginOutlined, LoginRounded, Logout, NotificationsNoneRounded, People, Settings, Work, WorkOffRounded } from "@mui/icons-material";
+import { Home, Info, LoginOutlined, LoginRounded, Logout, NotificationsNoneRounded, People, Settings, Work, WorkOffRounded } from "@mui/icons-material";
 import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem } from "@mui/material";
-import { useState, MouseEvent, useEffect } from "react";
+import { useState, MouseEvent, useEffect, useContext } from "react";
 import Login from "../Forms/Login";
 import { useNavigate } from "react-router-dom";
+import { IsLoginContext } from "../../Context/IsLoginContext";
 
 export default function XMenu() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [isLogin,setIsLogin]=useState(false);
+    //const [isLogin,setIsLogin]=useState(false);
+    const {isLogin,setIsLogin}=useContext(IsLoginContext);
     const open = Boolean(anchorEl);
     const navigate=useNavigate();
     const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -21,7 +23,7 @@ export default function XMenu() {
         if(localStorage.getItem("token")){
             setIsLogin(true);
         }
-    },[])
+    },[isLogin])
 
     return (
         <>

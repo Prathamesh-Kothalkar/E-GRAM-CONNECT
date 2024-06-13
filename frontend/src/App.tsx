@@ -8,9 +8,12 @@ import Navbar from './Component/Navigation/Navbar';
 import Home from './Component/Home/Home';
 import Members from './Component/Members/Members';
 import Footer from './Component/Footer/Footer';
+import Complaint from './Component/Complaint/Complaint';
+import { IsLoginProvider } from './Context/IsLoginContext';
 function App() {
   return (
     <>
+    <IsLoginProvider>
       <BrowserRouter>
         <Navbar/>
         <Routes>
@@ -20,9 +23,11 @@ function App() {
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/adminsignup' element={<AdminSignup/>}/>
           <Route path='/members' element={<Members/>}/>
+          <Route path='/complaint' element={<Complaint/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>
+      </IsLoginProvider>
     </>
   )
 }
