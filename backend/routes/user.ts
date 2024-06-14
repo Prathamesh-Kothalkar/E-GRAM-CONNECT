@@ -166,6 +166,7 @@ userRouter.get("/complaint",userAuth,async (req,res)=>{
                 id:complaint._id,
                 title:complaint.title,
                 description:complaint.description,
+                category:complaint.category,
                 status:complaint.status,
                 issue_date:complaint.issue_date,
                 update_date:complaint.update_date,

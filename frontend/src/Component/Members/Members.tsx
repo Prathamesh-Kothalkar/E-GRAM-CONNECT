@@ -71,7 +71,7 @@ function LoadingSkeletons() {
     );
 }
 
-function MembersCard({ name,ward,phone,img,post }) {
+function MembersCard({ name,ward,phone,img,post }:any) {
     return (
         <div className="w-auto h-auto p-3 m-4 md:m-2 rounded-md shadow-sm shadow-slate-700 hover:scale-110 hover:bg-blue-50 transition-all">
             <div className="flex justify-center">
