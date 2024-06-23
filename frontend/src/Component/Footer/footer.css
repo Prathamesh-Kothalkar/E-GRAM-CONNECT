@@ -6,7 +6,7 @@ li{
         text-align: center;
         /* margin: 9px; */
         cursor: pointer;
-        transition: all ease-in 6ms;
+        transition: all ease-in 0.3s;
 }
 
 li:hover{

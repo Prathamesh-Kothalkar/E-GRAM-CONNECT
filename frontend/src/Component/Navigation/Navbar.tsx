@@ -8,7 +8,7 @@ type Value = {
     setIsLogin:React.Dispatch<React.SetStateAction<boolean>>
 }
 export default function Navbar() {
-    const {isLogin,setIsLogin}:Value =useContext(IsLoginContext)
+    const {isLogin,setIsLogin} =useContext(IsLoginContext)
     console.log(isLogin)
     const navigate=useNavigate();
     useEffect(()=>{
@@ -18,17 +18,17 @@ export default function Navbar() {
     },[isLogin])
     return <>
         <div className="w-full z-40 h-14 backdrop-blur-xl scroll-smooth bg-opacity-75 flex justify-between top-0 right-0 fixed">
-            <div className="text-black font-bold text-3xl p-2">
-                E-Gram
+            <div className="text-black font-semibold text-3xl p-2">
+                GRAM-JANSEVA
             </div>
             <div className="text-xl font-semibold">
                 <ul className="flex m-0">
-                    <li className="hidden md:block xl:block mt-2 px-2 cursor-pointer">Home</li>
-                    <li className="hidden md:block xl:block mt-2 px-2 cursor-pointer">Projects</li>
+                    <li className="hidden md:block xl:block mt-2 cursor-pointer shadow-sm p-2 hover:bg-gray-300 rounded-sm transition-all" onClick={()=>{navigate("/")}}>Home</li>
+                    <li className="hidden md:block xl:block mt-2 p-2 cursor-pointer shadow-sm hover:bg-gray-300 rounded-sm transition-all "onClick={()=>{navigate("/projects")}}>Projects</li>
                     {
                        isLogin?
-                        <li className="hidden md:block  xl:block mt-2 px-2 cursor-pointer" onClick={()=>{navigate("/complaint")}}>Complaint</li>:
-                        <li className="hidden md:block  xl:block mt-2 px-2 cursor-pointer">About</li>
+                        <li className="hidden md:block  xl:block mt-2 p-2 cursor-pointer shadow-sm hover:bg-gray-300 rounded-sm transition-all" onClick={()=>{navigate("/complaint")}}>Complaint</li>:
+                        <li className="hidden md:block  xl:block mt-2 p-2 cursor-pointer shadow-sm hover:bg-gray-300 rounded-sm transition-all ">About</li>
                     }
                     <li><XMenu /></li>
                 </ul>

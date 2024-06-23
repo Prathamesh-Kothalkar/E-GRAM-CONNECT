@@ -1,4 +1,4 @@
-import { Home, Info, LoginOutlined, LoginRounded, Logout, NotificationsNoneRounded, People, Settings, Work, WorkOffRounded } from "@mui/icons-material";
+import { BookmarkAddRounded, Home, Info, LoginOutlined, LoginRounded, Logout, NotificationsNoneRounded, People, Settings, Work, WorkOffRounded } from "@mui/icons-material";
 import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import { useState, MouseEvent, useEffect, useContext } from "react";
 import Login from "../Forms/Login";
@@ -79,13 +79,22 @@ export default function XMenu() {
                     </ListItemIcon>
                     Home
                 </MenuItem>
+                {
+                    isLogin?
+                    <MenuItem onClick={()=>{navigate("/complaint");setAnchorEl(null)}}>
+                     <ListItemIcon>
+                        <BookmarkAddRounded fontSize="small" />
+                    </ListItemIcon>
+                    Complaints
+                </MenuItem>:<></>
+                }
                 <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                         <Info fontSize="small" />
                     </ListItemIcon>
                     About
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={()=>{navigate("/projects");setAnchorEl(null)}}>
                     <ListItemIcon>
                         <Work fontSize="small" />
                     </ListItemIcon>

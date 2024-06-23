@@ -10,6 +10,7 @@ import Members from './Component/Members/Members';
 import Footer from './Component/Footer/Footer';
 import Complaint from './Component/Complaint/Complaint';
 import { IsLoginProvider } from './Context/IsLoginContext';
+import Project from './Component/Project/Project';
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
           <Route path='/adminsignup' element={<AdminSignup/>}/>
           <Route path='/members' element={<Members/>}/>
           <Route path='/complaint' element={<Complaint/>}/>
+          <Route path='/projects' element={<Project/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>

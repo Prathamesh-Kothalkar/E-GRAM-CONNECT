@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import XButton from "../FormComponent/Button";
+import Loader from "./Loader";
 
 interface Complaint {
     id: string;
@@ -27,6 +28,7 @@ interface ComplaintBoxProps {
 
 export default function GetComplaints() {
     const [complaints, setComplaints] = useState<Complaint[]>([]);
+    const [loading,setLoading]=useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -45,7 +47,7 @@ export default function GetComplaints() {
                 const data:Complaint[]=response.data.complaint;
                 setComplaints(data);
                 console.log(complaints);
-                
+                setLoading(false)
             } catch (err) {
                 console.log(err);
             }
@@ -55,9 +57,15 @@ export default function GetComplaints() {
     }, []);
 
     return (
-        <>
-            <div className="h-screen grid grid-cols-1 md:grid-cols-3 xl:grids-cols-4 bg-slate-200 transition">
-            {complaints.map((e:Complaint) => (
+        <>{
+            loading?
+            <div className="bg-slate-200">
+                <Loader/>
+            </div>
+            :
+            <div className=" grid grid-cols-1 md:grid-cols-3 xl:grids-cols-4 bg-slate-200 transition">
+            {
+            complaints.map((e:Complaint) => (
                 <ComplaintBox
                     key={e.id}
                     id={e.id}
@@ -68,10 +76,12 @@ export default function GetComplaints() {
                     status={e.status}
                     update={e.update_date}
                     evi={e.evidence}
-                />
-            ))}
-            </div>
+                />))
+                }
             
+            </div>
+        }
+           
         </>
     );
 }
@@ -107,7 +117,7 @@ function ComplaintBox({ id, title, desc, category, issue, status, update, evi }:
                          Last Update :{issue.split("T")[0]}
                     </div>
                 </div>
-                <XButton text={"Show Detail"} onClick={()=>{alert(id)}}/>
+                <XButton text={"Show Detail"} onClick={()=>{alert("Your Id: "+id+"\n Desc "+desc+"\nEvidenec: "+evi.join(","))}}/>
             </div>
         </div>
     );

@@ -5,7 +5,7 @@ export default function Footer(){
         <div className="md:p-5 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 space-x-0">
             <div className="p-5">
                 <div className="text-black text-3xl font-semibold">
-                    E-GRAM
+                        GRAM-JANSEVA
                 </div>
                 <div className="py-2">
                     A Digital Village Council (Gram-Panchayat)
